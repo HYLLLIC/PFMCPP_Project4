@@ -284,8 +284,8 @@ void part3()
     std::cout << "An operation followed by attempts to divide by 0, which are ignored and warns user: " << std::endl;
     std::cout << it.multiply(it).divide(0).divide(0.0f).divide(0.0) << std::endl;
 
-    std::cout << "FloatType x IntType  =  " << it.multiply( ft ) << std::endl;
-    std::cout << "(IntType + DoubleType + FloatType) x 24 = " << it.add( dt ).add( ft ).multiply( 24 ) << std::endl;
+    std::cout << "FloatType x IntType  =  " << it.multiply( static_cast<int> ( ft ) ) << std::endl;
+    std::cout << "(IntType + DoubleType + FloatType) x 24 = " << it.add( static_cast<int> ( dt ) ).add( static_cast<int> ( ft ) ).multiply( 24 ) << std::endl;
 }
 
 int main()
@@ -327,7 +327,7 @@ int main()
     
     // --------
     std::cout << "Use of function concatenation (mixed type arguments) " << std::endl;
-    std::cout << "New value of dt = (dt * it) / 5.0f + ft = " << *(dt.multiply(it).divide(5.0).add(ft).value) << std::endl;
+    std::cout << "New value of dt = (dt * it) / 5.0f + ft = " << *(dt.multiply(it).divide(5.0).add( static_cast<double> ( ft ) ).value) << std::endl;
 
     std::cout << "---------------------\n" << std::endl; 
 
