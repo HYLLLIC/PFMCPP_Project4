@@ -100,14 +100,13 @@ struct HeapA
     A* a = nullptr;
 };
 
-
-
 #include <iostream>
 
 struct FloatType;
 struct DoubleType;
 struct IntType;
 
+//FloatType
 struct FloatType
 {
     FloatType(float v) : value(new float(v)) {}
@@ -118,24 +117,9 @@ struct FloatType
     }
 
     FloatType& add(float x);
-    //FloatType& add(const FloatType& x);
-    //FloatType& add(const DoubleType& x);
-    //FloatType& add(const IntType& x);
-
     FloatType& subtract(float x);
-    //FloatType& subtract(const FloatType& x);
-    //FloatType& subtract(const DoubleType& x);
-    //FloatType& subtract(const IntType& x);
-
     FloatType& multiply(float x);
-    //FloatType& multiply(const FloatType& x);
-    //FloatType& multiply(const DoubleType& x);
-    //FloatType& multiply(const IntType& x);
-
     FloatType& divide(float x);
-    //FloatType& divide(const FloatType& x);
-    //FloatType& divide(const DoubleType& x);
-    //FloatType& divide(const IntType& x);
 
     operator float() const { return *value; }
 
@@ -143,6 +127,7 @@ private:
     float* value = nullptr;
 };
 
+//DoubleType
 struct DoubleType
 {
     DoubleType(double v) : value(new double(v)) {}
@@ -153,24 +138,9 @@ struct DoubleType
     }
 
     DoubleType& add(double x);
-    //DoubleType& add(const FloatType& x);
-    //DoubleType& add(const DoubleType& x);
-    //DoubleType& add(const IntType& x);
-
     DoubleType& subtract(double x);
-    //DoubleType& subtract(const FloatType& x);
-    //DoubleType& subtract(const DoubleType& x);
-    //DoubleType& subtract(const IntType& x);
-
     DoubleType& multiply(double x);
-    //DoubleType& multiply(const FloatType& x);
-    //DoubleType& multiply(const DoubleType& x);
-    //DoubleType& multiply(const IntType& x);
-
     DoubleType& divide(double x);
-    //DoubleType& divide(const FloatType& x);
-    //DoubleType& divide(const DoubleType& x);
-    //DoubleType& divide(const IntType& x);
 
     operator double() const { return *value; }
 
@@ -178,6 +148,7 @@ private:
     float* value = nullptr;
 };
 
+//IntType
 struct IntType
 {
     IntType(int v) : value(new int(v)) {}
@@ -188,24 +159,9 @@ struct IntType
     }
 
     IntType& add(int x);
-    //IntType& add(const FloatType& x);
-    //IntType& add(const DoubleType& x);
-    //IntType& add(const IntType& x);
-
     IntType& subtract(int x);
-    //IntType& subtract(const FloatType& x);
-    //IntType& subtract(const DoubleType& x);
-    //IntType& subtract(const IntType& x);
-
     IntType& multiply(int x);
-    //IntType& multiply(const FloatType& x);
-    //IntType& multiply(const DoubleType& x);
-    //IntType& multiply(const IntType& x);
-
     IntType& divide(int x);
-    //IntType& divide(const FloatType& x);
-    //IntType& divide(const DoubleType& x);
-    //IntType& divide(const IntType& x);
 
     operator float() const { return *value; }
 
@@ -219,61 +175,16 @@ FloatType& FloatType::add(float x)
     return *this;
 }
 
-FloatType& FloatType::add(const FloatType& x)
-{
-    return add(*x.value);
-}
-
-FloatType& FloatType::add(const DoubleType& x)
-{
-    return add(*x.value);
-}
-
-FloatType& FloatType::add(const IntType& x)
-{
-    return add(*x.value);
-}
-
 FloatType& FloatType::subtract(float x)
 {
     *value -= x;
     return *this;
 }
 
-FloatType& FloatType::subtract(const FloatType& x)
-{
-    return subtract(*x.value);
-}
-
-FloatType& FloatType::subtract(const DoubleType& x)
-{
-    return subtract(*x.value);
-}
-
-FloatType& FloatType::subtract(const IntType& x)
-{
-    return subtract(*x.value);
-}
-
 FloatType& FloatType::multiply(float x)
 {
     *value *= x;
     return *this;
-}
-
-FloatType& FloatType::multiply(const FloatType& x)
-{
-    return multiply(*x.value);
-}
-
-FloatType& FloatType::multiply(const DoubleType& x)
-{
-    return multiply(*x.value);
-}
-
-FloatType& FloatType::multiply(const IntType& x)
-{
-    return multiply(*x.value);
 }
 
 FloatType& FloatType::divide(float x)
@@ -286,40 +197,10 @@ FloatType& FloatType::divide(float x)
     return *this;
 }
 
-FloatType& FloatType::divide(const FloatType& x)
-{
-    return divide(*x.value);
-}
-
-FloatType& FloatType::divide(const DoubleType& x)
-{
-    return divide(*x.value);
-}
-
-FloatType& FloatType::divide(const IntType& x)
-{
-    return divide(*x.value);
-}
-
 DoubleType& DoubleType::add(double x)
 {
     *value += x;
     return *this;
-}
-
-DoubleType& DoubleType::add(const FloatType& x)
-{
-    return add(*x.value);
-}
-
-DoubleType& DoubleType::add(const DoubleType& x)
-{
-    return add(*x.value);
-}
-
-DoubleType& DoubleType::add(const IntType& x)
-{
-    return add(*x.value);
 }
 
 DoubleType& DoubleType::subtract(double x)
@@ -328,40 +209,10 @@ DoubleType& DoubleType::subtract(double x)
     return *this;
 }
 
-DoubleType& DoubleType::subtract(const FloatType& x)
-{
-    return subtract(*x.value);
-}
-
-DoubleType& DoubleType::subtract(const DoubleType& x)
-{
-    return subtract(*x.value);
-}
-
-DoubleType& DoubleType::subtract(const IntType& x)
-{
-    return subtract(*x.value);
-}
-
 DoubleType& DoubleType::multiply(double x)
 {
     *value *= x;
     return *this;
-}
-
-DoubleType& DoubleType::multiply(const FloatType& x)
-{
-    return multiply(*x.value);
-}
-
-DoubleType& DoubleType::multiply(const DoubleType& x)
-{
-    return multiply(*x.value);
-}
-
-DoubleType& DoubleType::multiply(const IntType& x)
-{
-    return multiply(*x.value);
 }
 
 DoubleType& DoubleType::divide(double x)
@@ -374,40 +225,10 @@ DoubleType& DoubleType::divide(double x)
     return *this;
 }
 
-DoubleType& DoubleType::divide(const FloatType& x)
-{
-    return divide(*x.value);
-}
-
-DoubleType& DoubleType::divide(const DoubleType& x)
-{
-    return divide(*x.value);
-}
-
-DoubleType& DoubleType::divide(const IntType& x)
-{
-    return divide(*x.value);
-}
-
 IntType& IntType::add(int x)
 {
     *value += x;
     return *this;
-}
-
-IntType& IntType::add(const FloatType& x)
-{
-    return add(*x.value);
-}
-
-IntType& IntType::add(const DoubleType& x)
-{
-    return add(*x.value);
-}
-
-IntType& IntType::add(const IntType& x)
-{
-    return add(*x.value);
 }
 
 IntType& IntType::subtract(int x)
@@ -416,40 +237,10 @@ IntType& IntType::subtract(int x)
     return *this;
 }
 
-IntType& IntType::subtract(const FloatType& x)
-{
-    return subtract(*x.value);
-}
-
-IntType& IntType::subtract(const DoubleType& x)
-{
-    return subtract(*x.value);
-}
-
-IntType& IntType::subtract(const IntType& x)
-{
-    return subtract(*x.value);
-}
-
 IntType& IntType::multiply(int x)
 {
     *value *= x;
     return *this;
-}
-
-IntType& IntType::multiply(const FloatType& x)
-{
-    return multiply(*x.value);
-}
-
-IntType& IntType::multiply(const DoubleType& x)
-{
-    return multiply(*x.value);
-}
-
-IntType& IntType::multiply(const IntType& x)
-{
-    return multiply(*x.value);
 }
 
 IntType& IntType::divide(int x)
@@ -463,21 +254,6 @@ IntType& IntType::divide(int x)
         *value /= x;   
     }
     return *this;
-}
-
-IntType& IntType::divide(const FloatType& x)
-{
-    return divide(*x.value);
-}
-
-IntType& IntType::divide(const DoubleType& x)
-{
-    return divide(*x.value);
-}
-
-IntType& IntType::divide(const IntType& x)
-{
-    return divide(*x.value);
 }
 
 /*
