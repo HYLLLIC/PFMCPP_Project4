@@ -322,21 +322,21 @@ int main()
 
     // DoubleType/IntType object instanciation and method tests
     // --------
-    std::cout << "Initial value of dt: " << *dt.value << std::endl;
-    std::cout << "Initial value of it: " << *it.value << std::endl;
+    std::cout << "Initial value of dt: " << dt << std::endl;
+    std::cout << "Initial value of it: " << it << std::endl;
     
     // --------
     std::cout << "Use of function concatenation (mixed type arguments) " << std::endl;
-    std::cout << "New value of dt = (dt * it) / 5.0f + ft = " << *(dt.multiply(it).divide(5.0).add( static_cast<double> ( ft ) ).value) << std::endl;
+    std::cout << "New value of dt = (dt * it) / 5.0f + ft = " << (dt.multiply(it).divide(5.0).add( static_cast<double> ( ft ) )) << std::endl;
 
     std::cout << "---------------------\n" << std::endl; 
 
     // Intercept division by 0
     // --------
     std::cout << "Intercept division by 0 " << std::endl;
-    std::cout << "New value of it = it / 0 = " << *it.divide(0).value << std::endl;
-    std::cout << "New value of ft = ft / 0 = " << *ft.divide(0).value << std::endl;
-    std::cout << "New value of dt = dt / 0 = " << *dt.divide(0).value << std::endl;
+    std::cout << "New value of it = it / 0 = " << it.divide(0) << std::endl;
+    std::cout << "New value of ft = ft / 0 = " << ft.divide(0) << std::endl;
+    std::cout << "New value of dt = dt / 0 = " << dt.divide(0) << std::endl;
 
     std::cout << "---------------------\n" << std::endl; 
 
