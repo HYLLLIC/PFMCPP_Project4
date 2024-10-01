@@ -10,15 +10,15 @@
     Build/Run often with this task to make sure you're not breaking the code with each step.
     I recommend committing after you get each step working so you can revert to a working version easily if needed.
 
- 1) remove your functions that accepted a User-Defined Type
+ 1) remove your functions that accepted a User-Defined Type // done?
  
- 2) remove any getValue() functions if you added them
+ 2) remove any getValue() functions if you added them // done?
  
- 3) move all of your add/subtract/multiply/divide implementations out of the class.
+ 3) move all of your add/subtract/multiply/divide implementations out of the class. // done
   
  4) add user-defined conversion functions that convert to the numeric type your object holds.
         i.e. if your type holds an int, you'll need an operator int() function.
-        REMEMBER: if a member function doesn't modify any member variables of the class it exists in, what qualifier can we add to that function's signature?
+        REMEMBER: if a member function doesn't modify any member variables of the class it exists in, what qualifier can we add to that function's signature? // const
  
  5) make your member variable private.
          this conversion function should be the ONLY WAY to access the held value.
@@ -28,29 +28,12 @@
  
  7) use your knowledge of casting to remove any conversion warnings. 
 
- 8) insert 'part3();' before the 'good to go' at the end of your main(); 
-        move this part3 function to before main()
+ 8) insert 'part3();' before the 'good to go' at the end of your main(); //done
+        move this part3 function to before main() // done
 
  9) click the [run] button.  Clear up any errors or warnings as best you can.
 
  */
-
-void part3()
-{
-    FloatType ft( 5.5f );
-    DoubleType dt( 11.1 );
-    IntType it ( 34 );
-    DoubleType pi( 3.14 );
-
-    std::cout << "The result of FloatType^4 divided by IntType is: " << ft.multiply( ft ).multiply( ft ).divide( it ) << std::endl;
-    std::cout << "The result of DoubleType times 3 plus IntType is : " << dt.multiply( 3 ).add( it ) << std::endl;
-    std::cout << "The result of IntType divided by 3.14 multiplied by DoubleType minus FloatType is: " << it.divide( pi ).multiply( dt ).subtract( ft ) << std::endl;
-    std::cout << "An operation followed by attempts to divide by 0, which are ignored and warns user: " << std::endl;
-    std::cout << it.multiply(it).divide(0).divide(0.0f).divide(0.0) << std::endl;
-    
-    std::cout << "FloatType x IntType  =  " << it.multiply( ft ) << std::endl;
-    std::cout << "(IntType + DoubleType + FloatType) x 24 = " << it.add( dt ).add( ft ).multiply( 24 ) << std::endl;
-}
 
 /*
 your program should generate the following output EXACTLY.
@@ -502,6 +485,23 @@ IntType& IntType::divide(const IntType& x)
  Wait for my code review.
  */
 
+void part3()
+{
+    FloatType ft( 5.5f );
+    DoubleType dt( 11.1 );
+    IntType it ( 34 );
+    DoubleType pi( 3.14 );
+
+    std::cout << "The result of FloatType^4 divided by IntType is: " << ft.multiply( ft ).multiply( ft ).divide( it ) << std::endl;
+    std::cout << "The result of DoubleType times 3 plus IntType is : " << dt.multiply( 3 ).add( it ) << std::endl;
+    std::cout << "The result of IntType divided by 3.14 multiplied by DoubleType minus FloatType is: " << it.divide( pi ).multiply( dt ).subtract( ft ) << std::endl;
+    std::cout << "An operation followed by attempts to divide by 0, which are ignored and warns user: " << std::endl;
+    std::cout << it.multiply(it).divide(0).divide(0.0f).divide(0.0) << std::endl;
+
+    std::cout << "FloatType x IntType  =  " << it.multiply( ft ) << std::endl;
+    std::cout << "(IntType + DoubleType + FloatType) x 24 = " << it.add( dt ).add( ft ).multiply( 24 ) << std::endl;
+}
+
 int main()
 {   
     //testing instruction 0
@@ -554,6 +554,8 @@ int main()
 
     std::cout << "---------------------\n" << std::endl; 
 
+    part3();
+    
     std::cout << "good to go!\n";
 
     return 0;
