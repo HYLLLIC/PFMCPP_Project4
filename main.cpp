@@ -298,21 +298,21 @@ int main()
     DoubleType dt (2);
     IntType it (2) ;
 
-    std::cout << "FloatType add result=" << *ft.add(2.0f).value << std::endl;
-    std::cout << "FloatType subtract result=" << *ft.subtract(2.0f).value << std::endl;
-    std::cout << "FloatType multiply result=" << *ft.multiply(2.0f).value << std::endl;
-    std::cout << "FloatType divide result=" << *ft.divide(16.0f).value << std::endl << std::endl;
+    std::cout << "FloatType add result=" << ft.add(2.0f) << std::endl;
+    std::cout << "FloatType subtract result=" << ft.subtract(2.0f) << std::endl;
+    std::cout << "FloatType multiply result=" << ft.multiply(2.0f) << std::endl;
+    std::cout << "FloatType divide result=" << ft.divide(16.0f) << std::endl << std::endl;
 
-    std::cout << "DoubleType add result=" << *dt.add(2.0).value << std::endl;
-    std::cout << "DoubleType subtract result=" << *dt.subtract(2.0).value << std::endl;
-    std::cout << "DoubleType multiply result=" << *dt.multiply(2.0).value << std::endl;
-    std::cout << "DoubleType divide result=" << *dt.divide(5.0).value << std::endl << std::endl;
+    std::cout << "DoubleType add result=" << dt.add(2.0) << std::endl;
+    std::cout << "DoubleType subtract result=" << dt.subtract(2.0) << std::endl;
+    std::cout << "DoubleType multiply result=" << dt.multiply(2.0) << std::endl;
+    std::cout << "DoubleType divide result=" << divide(5.0) << std::endl << std::endl;
 
-    std::cout << "IntType add result=" << *it.add(2).value << std::endl;
-    std::cout << "IntType subtract result=" << *it.subtract(2).value << std::endl;
-    std::cout << "IntType multiply result=" << *it.multiply(2).value << std::endl;
-    std::cout << "IntType divide result=" << *it.divide(3).value << std::endl << std::endl;
-    std::cout << "Chain calculation = " << *(it.multiply(1000).divide(2).subtract(10).add(100)).value << std::endl;
+    std::cout << "IntType add result=" << it.add(2) << std::endl;
+    std::cout << "IntType subtract result=" << it.subtract(2) << std::endl;
+    std::cout << "IntType multiply result=" << it.multiply(2) << std::endl;
+    std::cout << "IntType divide result=" << it.divide(3) << std::endl << std::endl;
+    std::cout << "Chain calculation = " << (it.multiply(1000).divide(2).subtract(10).add(100)) << std::endl;
 
     // FloatType object instanciation and method tests
     // --------
