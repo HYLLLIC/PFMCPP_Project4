@@ -10,17 +10,17 @@
     Build/Run often with this task to make sure you're not breaking the code with each step.
     I recommend committing after you get each step working so you can revert to a working version easily if needed.
 
- 1) remove your functions that accepted a User-Defined Type // done?
+ 1) remove your functions that accepted a User-Defined Type
  
- 2) remove any getValue() functions if you added them // done?
+ 2) remove any getValue() functions if you added them
  
- 3) move all of your add/subtract/multiply/divide implementations out of the class. // done
+ 3) move all of your add/subtract/multiply/divide implementations out of the class.
   
- 4) add user-defined conversion functions that convert to the numeric type your object holds. // done?
-        i.e. if your type holds an int, you'll need an operator int() function. // done?
-        REMEMBER: if a member function doesn't modify any member variables of the class it exists in, what qualifier can we add to that function's signature? // const
+ 4) add user-defined conversion functions that convert to the numeric type your object holds.
+        i.e. if your type holds an int, you'll need an operator int() function.
+        REMEMBER: if a member function doesn't modify any member variables of the class it exists in, what qualifier can we add to that function's signature?
  
- 5) make your member variable private. // done?
+ 5) make your member variable private.
          this conversion function should be the ONLY WAY to access the held value.
          use the proper casting technique to invoke this conversion function
  
@@ -28,8 +28,8 @@
  
  7) use your knowledge of casting to remove any conversion warnings. 
 
- 8) insert 'part3();' before the 'good to go' at the end of your main(); //done
-        move this part3 function to before main() // done
+ 8) insert 'part3();' before the 'good to go' at the end of your main();
+        move this part3 function to before main()
 
  9) click the [run] button.  Clear up any errors or warnings as best you can.
 
