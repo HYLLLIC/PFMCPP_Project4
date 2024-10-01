@@ -16,11 +16,11 @@
  
  3) move all of your add/subtract/multiply/divide implementations out of the class. // done
   
- 4) add user-defined conversion functions that convert to the numeric type your object holds.
-        i.e. if your type holds an int, you'll need an operator int() function.
+ 4) add user-defined conversion functions that convert to the numeric type your object holds. // done?
+        i.e. if your type holds an int, you'll need an operator int() function. // done?
         REMEMBER: if a member function doesn't modify any member variables of the class it exists in, what qualifier can we add to that function's signature? // const
  
- 5) make your member variable private.
+ 5) make your member variable private. // done?
          this conversion function should be the ONLY WAY to access the held value.
          use the proper casting technique to invoke this conversion function
  
@@ -145,7 +145,7 @@ struct DoubleType
     operator double() const { return *value; }
 
 private:
-    float* value = nullptr;
+    double* value = nullptr;
 };
 
 //IntType
@@ -163,12 +163,13 @@ struct IntType
     IntType& multiply(int x);
     IntType& divide(int x);
 
-    operator float() const { return *value; }
+    operator int() const { return *value; }
 
 private:
-    float* value = nullptr;
+    int* value = nullptr;
 };
 
+//functions
 FloatType& FloatType::add(float x)
 {
     *value += x;
@@ -277,9 +278,9 @@ void part3()
     IntType it ( 34 );
     DoubleType pi( 3.14 );
 
-    std::cout << "The result of FloatType^4 divided by IntType is: " << ft.multiply( ft ).multiply( ft ).divide( it ) << std::endl;
+    std::cout << "The result of FloatType^4 divided by IntType is: " << ft.multiply( ft ).multiply( ft ).divide( static_cast<float> ( it ) ) << std::endl;
     std::cout << "The result of DoubleType times 3 plus IntType is : " << dt.multiply( 3 ).add( it ) << std::endl;
-    std::cout << "The result of IntType divided by 3.14 multiplied by DoubleType minus FloatType is: " << it.divide( pi ).multiply( dt ).subtract( ft ) << std::endl;
+    std::cout << "The result of IntType divided by 3.14 multiplied by DoubleType minus FloatType is: " << it.divide( static_cast<int> ( pi ) ).multiply( static_cast<int> ( dt ) ).subtract( static_cast<int> ( ft ) ) << std::endl;
     std::cout << "An operation followed by attempts to divide by 0, which are ignored and warns user: " << std::endl;
     std::cout << it.multiply(it).divide(0).divide(0.0f).divide(0.0) << std::endl;
 
