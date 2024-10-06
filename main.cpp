@@ -46,7 +46,7 @@ Project 4: Part 4 / 9
     You can learn more about the explicit keyword here: 
     https://en.cppreference.com/w/cpp/language/explicit
  
- 5) insert part4(); at the end of main, before the 'good to go'
+ 5) insert part4(); at the end of main, before the 'good to go'    //done
  
  6) make sure it compiles without errors.
  
@@ -409,7 +409,7 @@ IntType& IntType::pow(const IntType& y)
 
 IntType& IntType::powInternal(int arg)
 {
-    *value = std::pow(*value, arg);
+    *value = static_cast<int>(std::pow(*value, arg));
     return *this;
 }
 
