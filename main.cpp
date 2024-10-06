@@ -12,8 +12,8 @@ Project 4: Part 4 / 9
  
  1) add pow() functions, and a powInternal() function to each of your UDTs
      a) your pow() functions should call powInternal()    //done
-     b) add a pow() whose argument type is the primitive your UDT owns.  the argument should be passed by copy.
-     c) for each UDT in the file, your class should have pow() overloads that take that UDT as the function argument.
+     b) add a pow() whose argument type is the primitive your UDT owns.  the argument should be passed by copy.    //done
+     c) for each UDT in the file, your class should have pow() overloads that take that UDT as the function argument.    //done
          the argument should be passed as const ref
          i.e. if you had UDTs named IntType, FloatType, DoubleType
              in your IntType class, you'd have:
@@ -21,18 +21,18 @@ Project 4: Part 4 / 9
                  pow(const FloatType&),
                  pow(const DoubleType&),
                  and pow(int)
-     d) be sure to remember the rules about what member functions can be called on const objects.
+     d) be sure to remember the rules about what member functions can be called on const objects.    //done?
              (const objects can only call their const member functions)
-     e) the pow() functions should be chainable.
+     e) the pow() functions should be chainable.    //done - added return *this; to the end of each function
  
- 2) your powInternal() function should do something like this in its body:    *val = std::pow( *val, arg );
-         where 'arg' is the passed-in type, converted to whatever type your object is holding.
+ 2) your powInternal() function should do something like this in its body:    *val = std::pow( *val, arg );    //done
+         where 'arg' is the passed-in type, converted to whatever type your object is holding.    //done
              if your UDT owns an int, then arg would be an int.
              if your UDT owns a float, then arg would be a float.
          std::pow's documentation is found here: https://en.cppreference.com/w/cpp/numeric/math/pow so be sure to include
              the proper header file listed there.    //done
-         powInternal() should be chainable.
-         powInternal() should be a private member function
+         powInternal() should be chainable.    //done
+         powInternal() should be a private member function    //done
  
  3) modify the Point class below to have 3 Constructors that accept your UDTs and one that accepts primitives.
      a) make the constructor that takes primitives initialize the two member variables.
@@ -283,10 +283,10 @@ struct FloatType
     FloatType& subtract(float x);
     FloatType& multiply(float x);
     FloatType& divide(float x);
-    FloatType& pow(float x);
-    FloatType& pow(const FloatType& x);
-    FloatType& pow(const DoubleType& x);
-    FloatType& pow(const IntType& x);
+    FloatType& pow(float y);
+    FloatType& pow(const FloatType& y);
+    FloatType& pow(const DoubleType& y);
+    FloatType& pow(const IntType& y);
 
     operator float() const { return *value; }
 
@@ -309,10 +309,10 @@ struct DoubleType
     DoubleType& subtract(double x);
     DoubleType& multiply(double x);
     DoubleType& divide(double x);
-    DoubleType& pow(double x);
-    DoubleType& pow(const FloatType& x);
-    DoubleType& pow(const DoubleType& x);
-    DoubleType& pow(const IntType& x);
+    DoubleType& pow(double y);
+    DoubleType& pow(const FloatType& y);
+    DoubleType& pow(const DoubleType& y);
+    DoubleType& pow(const IntType& y);
 
     operator double() const { return *value; }
 
@@ -335,10 +335,10 @@ struct IntType
     IntType& subtract(int x);
     IntType& multiply(int x);
     IntType& divide(int x);
-    IntType& pow(int x);
-    IntType& pow(const FloatType& x);
-    IntType& pow(const DoubleType& x);
-    IntType& pow(const IntType& x);
+    IntType& pow(int y);
+    IntType& pow(const FloatType& y);
+    IntType& pow(const DoubleType& y);
+    IntType& pow(const IntType& y);
 
     operator int() const { return *value; }
 
@@ -349,24 +349,25 @@ private:
 
 //functions
 
-FloatType& FloatType:pow(float x)
+//float
+FloatType& FloatType:pow(float y)
 {
-    powInternal(x);
+    powInternal(y);
 }
 
-FloatType& FloatType:pow(const FloatType& x)
+FloatType& FloatType:pow(const FloatType& y)
 {
-    powInternal(x);
+    powInternal(static_cast<float>(y));
 }
 
-FloatType& FloatType:pow(const DoubleType& x)
+FloatType& FloatType:pow(const DoubleType& y)
 {
-    powInternal(x);
+    powInternal(static_cast<float>(y));
 }
 
-FloatType& FloatType:pow(const IntType& x)
+FloatType& FloatType:pow(const IntType& y)
 {
-    powInternal(x);
+    powInternal(static_cast<float>(y));
 }
 
 FloatType& FloatType::powInternal(float arg)
@@ -403,24 +404,25 @@ FloatType& FloatType::divide(float x)
     return *this;
 }
 
-DoubleType& DoubleType:pow(double x)
+//double
+DoubleType& DoubleType:pow(double y)
 {
-    powInternal(x);
+    powInternal(y);
 }
 
-DoubleType& DoubleType:pow(const FloatType& x)
+DoubleType& DoubleType:pow(const FloatType& y)
 {
-    powInternal(x);
+    powInternal(static_cast<double>(y));
 }
 
-DoubleType& DoubleType:pow(const DoubleType& x)
+DoubleType& DoubleType:pow(const DoubleType& y)
 {
-    powInternal(x);
+    powInternal(static_cast<double>(y));
 }
 
-DoubleType& DoubleType:pow(const IntType& x)
+DoubleType& DoubleType:pow(const IntType& y)
 {
-    powInternal(x);
+    powInternal(static_cast<double>(y));
 }
 
 DoubleType& DoubleType::powInternal(float arg)
@@ -457,24 +459,25 @@ DoubleType& DoubleType::divide(double x)
     return *this;
 }
 
-IntType& IntType:pow(int x)
+//int
+IntType& IntType:pow(int y)
 {
-    powInternal(x);
+    powInternal(y);
 }
 
-IntType& IntType:pow(const FloatType& x)
+IntType& IntType:pow(const FloatType& y)
 {
-    powInternal(x);
+    powInternal(static_cast<int>(y));
 }
 
-IntType& IntType:pow(const DoubleType& x)
+IntType& IntType:pow(const DoubleType& y)
 {
-    powInternal(x);
+    powInternal(static_cast<int>(y));
 }
 
-IntType& IntType:pow(const IntType& x)
+IntType& IntType:pow(const IntType& y)
 {
-    powInternal(x);
+    powInternal(static_cast<int>(y));
 }
 
 IntType& IntType::powInternal(float arg)
