@@ -448,9 +448,9 @@ IntType& IntType::divide(int x)
 struct Point
 {
     explicit Point( float pOne, float pTwo ) : x(pOne), y(pTwo) {}
-    explicit Point( const FloatType pOne, const FloatType pTwo ) : Point(static_cast<float>(pOne), static_cast<float>(pTwo)) {}
-    explicit Point( const DoubleType pOne, const DoubleType pTwo ) : Point(static_cast<float>(pOne), static_cast<float>(pTwo)) {}
-    explicit Point( const IntType pOne, const IntType pTwo ) : Point(static_cast<float>(pOne), static_cast<float>(pTwo)) {}
+    explicit Point( const FloatType& pOne, const FloatType& pTwo ) : Point(static_cast<float>(pOne), static_cast<float>(pTwo)) {}
+    explicit Point( const DoubleType& pOne, const DoubleType& pTwo ) : Point(static_cast<float>(pOne), static_cast<float>(pTwo)) {}
+    explicit Point( const IntType& pOne, const IntType& pTwo ) : Point(static_cast<float>(pOne), static_cast<float>(pTwo)) {}
 
     Point& multiply(float m)
     {
@@ -476,7 +476,7 @@ struct Point
 
     void toString() const
     {
-         std::cout << "x is now: " << x << " y is now: " << y << std::endl;   
+         std::cout << "(x is now: " << x << " y is now: " << y << ")" << std::endl;   
     }
 
 private:
