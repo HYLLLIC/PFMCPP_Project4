@@ -220,7 +220,7 @@ struct DoubleType
 
 private:
     double* value = nullptr;
-    FloatType& powInternal(double arg);
+    DoubleType& powInternal(double arg);
 };
 
 //IntType
@@ -246,7 +246,7 @@ struct IntType
 
 private:
     int* value = nullptr;
-    FloatType& powInternal(int arg);
+    IntType& powInternal(int arg);
 };
 
 //functions
@@ -335,7 +335,7 @@ DoubleType& DoubleType::pow(const IntType& y)
     return *this;
 }
 
-DoubleType& DoubleType::powInternal(float arg)
+DoubleType& DoubleType::powInternal(double arg)
 {
     *value = std::pow(*value, arg);
     return *this;
@@ -394,7 +394,7 @@ IntType& IntType::pow(const IntType& y)
     return *this;
 }
 
-IntType& IntType::powInternal(float arg)
+IntType& IntType::powInternal(int arg)
 {
     *value = std::pow(*value, arg);
     return *this;
@@ -466,8 +466,8 @@ struct Point
 {
     explicit Point( float pOne, float pTwo ) : x(pOne), y(pTwo) {}
     explicit Point( const FloatType pOne, const FloatType pTwo ) : Point(static_cast<float>(pOne), static_cast<float>(pTwo)) {}
-    explicit Point( const DoubleType pOne, const DoubleType pTwo ) : Point(static_cast<double>(pOne), static_cast<double>(pTwo)) {}
-    explicit Point( const IntType pOne, const IntType pTwo ) : Point(static_cast<int>(pOne), static_cast<int>(pTwo)) {}
+    explicit Point( const DoubleType pOne, const DoubleType pTwo ) : Point(static_cast<float>(pOne), static_cast<float>(pTwo)) {}
+    explicit Point( const IntType pOne, const IntType pTwo ) : Point(static_cast<float>(pOne), static_cast<float>(pTwo)) {}
 
     Point& multiply(float m)
     {
@@ -478,22 +478,22 @@ struct Point
 
     Point& multiply(const FloatType& m)
     {
-        Point::multiply(static_cast<float>(m));
+        return multiply(static_cast<float>(m));
     }
 
     Point& multiply(const DoubleType& m)
     {
-         Point::multiply(static_cast<double>(m));   
+         return multiply(static_cast<float>(m));   
     }
 
     Point& multiply(const IntType& m)
     {
-         Point::multiply(static_cast<int>(m));   
+         return multiply(static_cast<float>(m));   
     }
 
     void toString() const
     {
-         std::count << "x is now: " << x << " y is now: " << y << std::endl;   
+         std::cout << "x is now: " << x << " y is now: " << y << std::endl;   
     }
 
 private:
