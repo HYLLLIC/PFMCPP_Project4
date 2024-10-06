@@ -174,12 +174,8 @@ struct IntType;
 //FloatType
 struct FloatType
 {
-    explicit FloatType(float v) : value(new float(v)) {}
-
-    ~FloatType()
-    {
-        delete value;
-    }
+    explicit FloatType(float v);
+    ~FloatType();
 
     FloatType& add(float x);
     FloatType& subtract(float x);
