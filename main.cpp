@@ -169,11 +169,11 @@ struct HeapA
 #include <iostream>
 #include <cmath>
 
-//UDTs
-
 struct FloatType;
 struct DoubleType;
 struct IntType;
+
+//UDTs
 
 //FloatType
 struct FloatType
@@ -476,7 +476,7 @@ struct Point
 
     void toString() const
     {
-         std::cout << "(x is now: " << x << " y is now: " << y << ")" << std::endl;   
+         std::cout << "Point { x: " << x << ", y: " << y << " }" << std::endl;   
     }
 
 private:
