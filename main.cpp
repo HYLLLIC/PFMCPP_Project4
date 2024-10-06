@@ -11,7 +11,7 @@ Project 4: Part 4 / 9
     I recommend committing after you get each step working so you can revert to a working version easily if needed.
  
  1) add pow() functions, and a powInternal() function to each of your UDTs
-     a) your pow() functions should call powInternal()
+     a) your pow() functions should call powInternal()    //done
      b) add a pow() whose argument type is the primitive your UDT owns.  the argument should be passed by copy.
      c) for each UDT in the file, your class should have pow() overloads that take that UDT as the function argument.
          the argument should be passed as const ref
@@ -30,7 +30,7 @@ Project 4: Part 4 / 9
              if your UDT owns an int, then arg would be an int.
              if your UDT owns a float, then arg would be a float.
          std::pow's documentation is found here: https://en.cppreference.com/w/cpp/numeric/math/pow so be sure to include
-             the proper header file listed there.
+             the proper header file listed there.    //done
          powInternal() should be chainable.
          powInternal() should be a private member function
  
@@ -263,6 +263,7 @@ struct HeapA
 };
 
 #include <iostream>
+#include <cmath>
 
 struct FloatType;
 struct DoubleType;
@@ -282,11 +283,16 @@ struct FloatType
     FloatType& subtract(float x);
     FloatType& multiply(float x);
     FloatType& divide(float x);
+    FloatType& pow(float x);
+    FloatType& pow(const FloatType& x);
+    FloatType& pow(const DoubleType& x);
+    FloatType& pow(const IntType& x);
 
     operator float() const { return *value; }
 
 private:
     float* value = nullptr;
+    FloatType& powInternal(float arg);
 };
 
 //DoubleType
@@ -303,11 +309,16 @@ struct DoubleType
     DoubleType& subtract(double x);
     DoubleType& multiply(double x);
     DoubleType& divide(double x);
+    DoubleType& pow(double x);
+    DoubleType& pow(const FloatType& x);
+    DoubleType& pow(const DoubleType& x);
+    DoubleType& pow(const IntType& x);
 
     operator double() const { return *value; }
 
 private:
     double* value = nullptr;
+    FloatType& powInternal(double arg);
 };
 
 //IntType
@@ -324,14 +335,46 @@ struct IntType
     IntType& subtract(int x);
     IntType& multiply(int x);
     IntType& divide(int x);
+    IntType& pow(int x);
+    IntType& pow(const FloatType& x);
+    IntType& pow(const DoubleType& x);
+    IntType& pow(const IntType& x);
 
     operator int() const { return *value; }
 
 private:
     int* value = nullptr;
+    FloatType& powInternal(int arg);
 };
 
 //functions
+
+FloatType& FloatType:pow(float x)
+{
+    powInternal(x);
+}
+
+FloatType& FloatType:pow(const FloatType& x)
+{
+    powInternal(x);
+}
+
+FloatType& FloatType:pow(const DoubleType& x)
+{
+    powInternal(x);
+}
+
+FloatType& FloatType:pow(const IntType& x)
+{
+    powInternal(x);
+}
+
+FloatType& FloatType::powInternal(float arg)
+{
+    *value = std::pow(*value, arg);
+    return *this;
+}
+
 FloatType& FloatType::add(float x)
 {
     *value += x;
@@ -360,6 +403,32 @@ FloatType& FloatType::divide(float x)
     return *this;
 }
 
+DoubleType& DoubleType:pow(double x)
+{
+    powInternal(x);
+}
+
+DoubleType& DoubleType:pow(const FloatType& x)
+{
+    powInternal(x);
+}
+
+DoubleType& DoubleType:pow(const DoubleType& x)
+{
+    powInternal(x);
+}
+
+DoubleType& DoubleType:pow(const IntType& x)
+{
+    powInternal(x);
+}
+
+DoubleType& DoubleType::powInternal(float arg)
+{
+    *value = std::pow(*value, arg);
+    return *this;
+}
+
 DoubleType& DoubleType::add(double x)
 {
     *value += x;
@@ -385,6 +454,32 @@ DoubleType& DoubleType::divide(double x)
         std::cout << "warning: floating point division by zero!\n";
     } 
     *value /= x;
+    return *this;
+}
+
+IntType& IntType:pow(int x)
+{
+    powInternal(x);
+}
+
+IntType& IntType:pow(const FloatType& x)
+{
+    powInternal(x);
+}
+
+IntType& IntType:pow(const DoubleType& x)
+{
+    powInternal(x);
+}
+
+IntType& IntType:pow(const IntType& x)
+{
+    powInternal(x);
+}
+
+IntType& IntType::powInternal(float arg)
+{
+    *value = std::pow(*value, arg);
     return *this;
 }
 
