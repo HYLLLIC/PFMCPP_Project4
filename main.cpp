@@ -34,11 +34,11 @@ Project 4: Part 4 / 9
          powInternal() should be chainable.    //done
          powInternal() should be a private member function    //done
  
- 3) modify the Point class below to have 3 Constructors that accept your UDTs and one that accepts primitives.
-     a) make the constructor that takes primitives initialize the two member variables.
-     b) for each of your 3 Ctors that accept UDTs: correctly implement a Delegating Constructor that calls the constructor which takes primitives
-     c) overload the multiply() function so it can accept each of your UDTs.  I've added an implementation you can mimick for this function.
-     d) add a toString() function to the Point class that prints out the x and y members via std::cout.
+ 3) modify the Point class below to have 3 Constructors that accept your UDTs and one that accepts primitives. //done
+     a) make the constructor that takes primitives initialize the two member variables. //done
+     b) for each of your 3 Ctors that accept UDTs: correctly implement a Delegating Constructor that calls the constructor which takes primitives    //done
+     c) overload the multiply() function so it can accept each of your UDTs.  I've added an implementation you can mimick for this function.    //done
+     d) add a toString() function to the Point class that prints out the x and y members via std::cout. //done?
  
  4) mark your UDT constructors as 'explicit'.  
     Adding this keyword prevents the compiler from implicitly creating instances of your UDT whenever primitives are passed to functions that take your UDT by const reference.
@@ -57,12 +57,38 @@ Project 4: Part 4 / 9
 
 struct Point
 {
+    Point( float pOne, float pTwo ) : x(pOne), y(pTwo) {}
+    Point( const FloatType pOne, const FloatType pTwo ) : Point(static_cast<float>(pOne), static_cast<float>(pTwo)) {}
+    Point( const DoubleType pOne, const DoubleType pTwo ) : Point(static_cast<double>(pOne), static_cast<double>(pTwo)) {}
+    Point( const IntType pOne, const IntType pTwo ) : Point(static_cast<int>(pOne), static_cast<int>(pTwo)) {}
+
     Point& multiply(float m)
     {
         x *= m;
         y *= m;
         return *this;
     }
+
+    Point& multiply(const FloatType& m)
+    {
+        Point::multiply(static_cast<float>(m));
+    }
+
+    Point& multiply(const DoubleType& m)
+    {
+         Point::multiply(static_cast<double>(m));   
+    }
+
+    Point& multiply(const IntType& m)
+    {
+         Point::multiply(static_cast<int>(m));   
+    }
+
+    void toString()
+    {
+         std::count << "x is now: " << x << " y is now: " << y << std::endl;   
+    }
+
 private:
     float x{0}, y{0};
 };
