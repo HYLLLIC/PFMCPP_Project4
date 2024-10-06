@@ -252,24 +252,28 @@ private:
 //functions
 
 //float
-FloatType& FloatType:pow(float y)
+FloatType& FloatType::pow(float y)
 {
     powInternal(y);
+    return *this;
 }
 
-FloatType& FloatType:pow(const FloatType& y)
+FloatType& FloatType::pow(const FloatType& y)
 {
     powInternal(static_cast<float>(y));
+    return *this;
 }
 
-FloatType& FloatType:pow(const DoubleType& y)
+FloatType& FloatType::pow(const DoubleType& y)
 {
     powInternal(static_cast<float>(y));
+    return *this;
 }
 
-FloatType& FloatType:pow(const IntType& y)
+FloatType& FloatType::pow(const IntType& y)
 {
     powInternal(static_cast<float>(y));
+    return *this;
 }
 
 FloatType& FloatType::powInternal(float arg)
@@ -307,24 +311,28 @@ FloatType& FloatType::divide(float x)
 }
 
 //double
-DoubleType& DoubleType:pow(double y)
+DoubleType& DoubleType::pow(double y)
 {
     powInternal(y);
+    return *this;
 }
 
-DoubleType& DoubleType:pow(const FloatType& y)
+DoubleType& DoubleType::pow(const FloatType& y)
 {
     powInternal(static_cast<double>(y));
+    return *this;
 }
 
-DoubleType& DoubleType:pow(const DoubleType& y)
+DoubleType& DoubleType::pow(const DoubleType& y)
 {
     powInternal(static_cast<double>(y));
+    return *this;
 }
 
-DoubleType& DoubleType:pow(const IntType& y)
+DoubleType& DoubleType::pow(const IntType& y)
 {
     powInternal(static_cast<double>(y));
+    return *this;
 }
 
 DoubleType& DoubleType::powInternal(float arg)
@@ -362,24 +370,28 @@ DoubleType& DoubleType::divide(double x)
 }
 
 //int
-IntType& IntType:pow(int y)
+IntType& IntType::pow(int y)
 {
     powInternal(y);
+    return *this;
 }
 
-IntType& IntType:pow(const FloatType& y)
+IntType& IntType::pow(const FloatType& y)
 {
     powInternal(static_cast<int>(y));
+    return *this;
 }
 
-IntType& IntType:pow(const DoubleType& y)
+IntType& IntType::pow(const DoubleType& y)
 {
     powInternal(static_cast<int>(y));
+    return *this;
 }
 
-IntType& IntType:pow(const IntType& y)
+IntType& IntType::pow(const IntType& y)
 {
     powInternal(static_cast<int>(y));
+    return *this;
 }
 
 IntType& IntType::powInternal(float arg)
