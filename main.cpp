@@ -153,6 +153,8 @@ good to go!
 Use a service like https://www.diffchecker.com/diff to compare your output. 
 */
 
+//Structs
+
 struct A {};
 struct HeapA
 { 
@@ -166,6 +168,8 @@ struct HeapA
 
 #include <iostream>
 #include <cmath>
+
+//UDTs
 
 struct FloatType;
 struct DoubleType;
@@ -196,12 +200,8 @@ private:
 //DoubleType
 struct DoubleType
 {
-    explicit DoubleType(double v) : value(new double(v)) {}
-
-    ~DoubleType()
-    {
-        delete value;
-    }
+    explicit DoubleType(double v);
+    ~DoubleType();
 
     DoubleType& add(double x);
     DoubleType& subtract(double x);
@@ -222,12 +222,8 @@ private:
 //IntType
 struct IntType
 {
-    explicit IntType(int v) : value(new int(v)) {}
-
-    ~IntType()
-    {
-        delete value;
-    }
+    explicit IntType(int v);
+    ~IntType();
 
     IntType& add(int x);
     IntType& subtract(int x);
@@ -245,9 +241,16 @@ private:
     IntType& powInternal(int arg);
 };
 
-//functions
+//UDT functions
 
 //float
+FloatType::FloatType(float v) : value(new float(v)) {}
+
+FloatType::~FloatType() 
+{
+    delete value;
+}
+
 FloatType& FloatType::pow(float y)
 {
     powInternal(y);
@@ -307,6 +310,13 @@ FloatType& FloatType::divide(float x)
 }
 
 //double
+DoubleType::DoubleType(double v) : value(new double(v)) {}
+
+DoubleType::~DoubleType() 
+{
+    delete value;
+}
+
 DoubleType& DoubleType::pow(double y)
 {
     powInternal(y);
@@ -366,6 +376,13 @@ DoubleType& DoubleType::divide(double x)
 }
 
 //int
+IntType::IntType(int v): value(new int(v)) {}
+
+IntType::~IntType()
+{
+    delete value;
+}
+
 IntType& IntType::pow(int y)
 {
     powInternal(y);
@@ -427,37 +444,7 @@ IntType& IntType::divide(int x)
     return *this;
 }
 
-/*
- MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
-
- Commit your changes by clicking on the Source Control panel on the left, entering a message, and click [Commit and push].
- 
- If you didn't already: 
-    Make a pull request after you make your first commit
-    pin the pull request link and this repl.it link to our DM thread in a single message.
-
- send me a DM to review your pull request when the project is ready for review.
-
- Wait for my code review.
- */
-
-void part3()
-{
-    FloatType ft( 5.5f );
-    DoubleType dt( 11.1 );
-    IntType it ( 34 );
-    DoubleType pi( 3.14 );
-
-    std::cout << "The result of FloatType^4 divided by IntType is: " << ft.multiply( ft ).multiply( ft ).divide( static_cast<float> ( it ) ) << std::endl;
-    std::cout << "The result of DoubleType times 3 plus IntType is : " << dt.multiply( 3 ).add( it ) << std::endl;
-    std::cout << "The result of IntType divided by 3.14 multiplied by DoubleType minus FloatType is: " << it.divide( static_cast<int> ( pi ) ).multiply( static_cast<int> ( dt ) ).subtract( static_cast<int> ( ft ) ) << std::endl;
-    std::cout << "An operation followed by attempts to divide by 0, which are ignored and warns user: " << std::endl;
-    std::cout << it.multiply(it).divide(0).divide(0.0f).divide(0.0) << std::endl;
-
-    std::cout << "FloatType x IntType  =  " << it.multiply( static_cast<int> ( ft ) ) << std::endl;
-    std::cout << "(IntType + DoubleType + FloatType) x 24 = " << it.add( static_cast<int> ( dt ) ).add( static_cast<int> ( ft ) ).multiply( 24 ) << std::endl;
-}
-
+//Point Struct
 struct Point
 {
     explicit Point( float pOne, float pTwo ) : x(pOne), y(pTwo) {}
@@ -495,6 +482,37 @@ struct Point
 private:
     float x{0}, y{0};
 };
+
+/*
+ MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
+
+ Commit your changes by clicking on the Source Control panel on the left, entering a message, and click [Commit and push].
+ 
+ If you didn't already: 
+    Make a pull request after you make your first commit
+    pin the pull request link and this repl.it link to our DM thread in a single message.
+
+ send me a DM to review your pull request when the project is ready for review.
+
+ Wait for my code review.
+ */
+
+void part3()
+{
+    FloatType ft( 5.5f );
+    DoubleType dt( 11.1 );
+    IntType it ( 34 );
+    DoubleType pi( 3.14 );
+
+    std::cout << "The result of FloatType^4 divided by IntType is: " << ft.multiply( ft ).multiply( ft ).divide( static_cast<float> ( it ) ) << std::endl;
+    std::cout << "The result of DoubleType times 3 plus IntType is : " << dt.multiply( 3 ).add( it ) << std::endl;
+    std::cout << "The result of IntType divided by 3.14 multiplied by DoubleType minus FloatType is: " << it.divide( static_cast<int> ( pi ) ).multiply( static_cast<int> ( dt ) ).subtract( static_cast<int> ( ft ) ) << std::endl;
+    std::cout << "An operation followed by attempts to divide by 0, which are ignored and warns user: " << std::endl;
+    std::cout << it.multiply(it).divide(0).divide(0.0f).divide(0.0) << std::endl;
+
+    std::cout << "FloatType x IntType  =  " << it.multiply( static_cast<int> ( ft ) ) << std::endl;
+    std::cout << "(IntType + DoubleType + FloatType) x 24 = " << it.add( static_cast<int> ( dt ) ).add( static_cast<int> ( ft ) ).multiply( 24 ) << std::endl;
+}
 
 void part4()
 {
