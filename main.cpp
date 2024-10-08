@@ -254,25 +254,21 @@ FloatType::~FloatType()
 FloatType& FloatType::pow(float y)
 {
     powInternal(y);
-    return *this;
 }
 
 FloatType& FloatType::pow(const FloatType& y)
 {
     powInternal(static_cast<float>(y));
-    return *this;
 }
 
 FloatType& FloatType::pow(const DoubleType& y)
 {
     powInternal(static_cast<float>(y));
-    return *this;
 }
 
 FloatType& FloatType::pow(const IntType& y)
 {
     powInternal(static_cast<float>(y));
-    return *this;
 }
 
 FloatType& FloatType::powInternal(float arg)
@@ -320,25 +316,21 @@ DoubleType::~DoubleType()
 DoubleType& DoubleType::pow(double y)
 {
     powInternal(y);
-    return *this;
 }
 
 DoubleType& DoubleType::pow(const FloatType& y)
 {
     powInternal(static_cast<double>(y));
-    return *this;
 }
 
 DoubleType& DoubleType::pow(const DoubleType& y)
 {
     powInternal(static_cast<double>(y));
-    return *this;
 }
 
 DoubleType& DoubleType::pow(const IntType& y)
 {
     powInternal(static_cast<double>(y));
-    return *this;
 }
 
 DoubleType& DoubleType::powInternal(double arg)
@@ -386,25 +378,21 @@ IntType::~IntType()
 IntType& IntType::pow(int y)
 {
     powInternal(y);
-    return *this;
 }
 
 IntType& IntType::pow(const FloatType& y)
 {
     powInternal(static_cast<int>(y));
-    return *this;
 }
 
 IntType& IntType::pow(const DoubleType& y)
 {
     powInternal(static_cast<int>(y));
-    return *this;
 }
 
 IntType& IntType::pow(const IntType& y)
 {
     powInternal(static_cast<int>(y));
-    return *this;
 }
 
 IntType& IntType::powInternal(int arg)
