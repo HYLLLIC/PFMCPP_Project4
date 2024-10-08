@@ -251,30 +251,30 @@ FloatType::~FloatType()
     delete value;
 }
 
-FloatType& FloatType::pow(float y)
-{
-    powInternal(y);
-}
-
-FloatType& FloatType::pow(const FloatType& y)
-{
-    powInternal(static_cast<float>(y));
-}
-
-FloatType& FloatType::pow(const DoubleType& y)
-{
-    powInternal(static_cast<float>(y));
-}
-
-FloatType& FloatType::pow(const IntType& y)
-{
-    powInternal(static_cast<float>(y));
-}
-
 FloatType& FloatType::powInternal(float arg)
 {
     *value = std::pow(*value, arg);
     return *this;
+}
+
+FloatType& FloatType::pow(float y)
+{
+    return powInternal(y);
+}
+
+FloatType& FloatType::pow(const FloatType& y)
+{
+    return powInternal(static_cast<float>(y));
+}
+
+FloatType& FloatType::pow(const DoubleType& y)
+{
+    return powInternal(static_cast<float>(y));
+}
+
+FloatType& FloatType::pow(const IntType& y)
+{
+    return powInternal(static_cast<float>(y));
 }
 
 FloatType& FloatType::add(float x)
@@ -313,30 +313,30 @@ DoubleType::~DoubleType()
     delete value;
 }
 
-DoubleType& DoubleType::pow(double y)
-{
-    powInternal(y);
-}
-
-DoubleType& DoubleType::pow(const FloatType& y)
-{
-    powInternal(static_cast<double>(y));
-}
-
-DoubleType& DoubleType::pow(const DoubleType& y)
-{
-    powInternal(static_cast<double>(y));
-}
-
-DoubleType& DoubleType::pow(const IntType& y)
-{
-    powInternal(static_cast<double>(y));
-}
-
 DoubleType& DoubleType::powInternal(double arg)
 {
     *value = std::pow(*value, arg);
     return *this;
+}
+
+DoubleType& DoubleType::pow(double y)
+{
+    return powInternal(y);
+}
+
+DoubleType& DoubleType::pow(const FloatType& y)
+{
+    return powInternal(static_cast<double>(y));
+}
+
+DoubleType& DoubleType::pow(const DoubleType& y)
+{
+    return powInternal(static_cast<double>(y));
+}
+
+DoubleType& DoubleType::pow(const IntType& y)
+{
+    return powInternal(static_cast<double>(y));
 }
 
 DoubleType& DoubleType::add(double x)
@@ -375,30 +375,30 @@ IntType::~IntType()
     delete value;
 }
 
-IntType& IntType::pow(int y)
-{
-    powInternal(y);
-}
-
-IntType& IntType::pow(const FloatType& y)
-{
-    powInternal(static_cast<int>(y));
-}
-
-IntType& IntType::pow(const DoubleType& y)
-{
-    powInternal(static_cast<int>(y));
-}
-
-IntType& IntType::pow(const IntType& y)
-{
-    powInternal(static_cast<int>(y));
-}
-
 IntType& IntType::powInternal(int arg)
 {
     *value = static_cast<int>(std::pow(*value, arg));
     return *this;
+}
+
+IntType& IntType::pow(int y)
+{
+    return powInternal(y);
+}
+
+IntType& IntType::pow(const FloatType& y)
+{
+    return powInternal(static_cast<int>(y));
+}
+
+IntType& IntType::pow(const DoubleType& y)
+{
+    return powInternal(static_cast<int>(y));
+}
+
+IntType& IntType::pow(const IntType& y)
+{
+    return powInternal(static_cast<int>(y));
 }
 
 IntType& IntType::add(int x)
