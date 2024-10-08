@@ -1,62 +1,69 @@
 /*
-Project 4: Part 4 / 9
- Chapter 4 Part 7
- Function/Constructor Overloading
+Project 4: Part 5 / 9
+ video: Chapter 5 Part 2
+ Operator Overloading.
 
- Create a branch named Part4
- 
- Do not delete your previous main. you will be adding to it.
+Do not delete your previous main. 
+
+ Create a branch named Part5
 
     Build/Run often with this task to make sure you're not breaking the code with each step.
     I recommend committing after you get each step working so you can revert to a working version easily if needed.
  
- 1) add pow() functions, and a powInternal() function to each of your UDTs
-     a) your pow() functions should call powInternal()    //done
-     b) add a pow() whose argument type is the primitive your UDT owns.  the argument should be passed by copy.    //done
-     c) for each UDT in the file, your class should have pow() overloads that take that UDT as the function argument.    //done
-         the argument should be passed as const ref
-         i.e. if you had UDTs named IntType, FloatType, DoubleType
-             in your IntType class, you'd have:
-                 pow(const IntType&),
-                 pow(const FloatType&),
-                 pow(const DoubleType&),
-                 and pow(int)
-     d) be sure to remember the rules about what member functions can be called on const objects.    //done?
-             (const objects can only call their const member functions)
-     e) the pow() functions should be chainable.    //done - added return *this; to the end of each function
+ 1) replace the add/subtract/multiply/etc functions in your UDTs with overloaded math operators 
+        e.g. add() would become operator+=() because it modifies the internal heap-allocated object.
+        The easiest way to do this is to just rename your member functions.  
+        Do not: delete your member functions and add new ones.  Simply rename them
+        You do not need to change the Point class's multiply() functions.
  
- 2) your powInternal() function should do something like this in its body:    *val = std::pow( *val, arg );    //done
-         where 'arg' is the passed-in type, converted to whatever type your object is holding.    //done
-             if your UDT owns an int, then arg would be an int.
-             if your UDT owns a float, then arg would be a float.
-         std::pow's documentation is found here: https://en.cppreference.com/w/cpp/numeric/math/pow so be sure to include
-             the proper header file listed there.    //done
-         powInternal() should be chainable.    //done
-         powInternal() should be a private member function    //done
+ 2) Your overloaded operators should only take primitives, passed by value.
+    since they are passed by value, they do not need to be const.
  
- 3) modify the Point class below to have 3 Constructors that accept your UDTs and one that accepts primitives. //done
-     a) make the constructor that takes primitives initialize the two member variables. //done
-     b) for each of your 3 Ctors that accept UDTs: correctly implement a Delegating Constructor that calls the constructor which takes primitives    //done
-     c) overload the multiply() function so it can accept each of your UDTs.  I've added an implementation you can mimick for this function.    //done
-     d) add a toString() function to the Point class that prints out the x and y members via std::cout. //done?
+ 3) don't delete your conversion functions.
  
- 4) mark your UDT constructors as 'explicit'.   //done
-    Adding this keyword prevents the compiler from implicitly creating instances of your UDT whenever primitives are passed to functions that take your UDT by const reference.
-    This keyword means you can only create an instance of the class by Explicitly writing the type name.
-    You can learn more about the explicit keyword here: 
-    https://en.cppreference.com/w/cpp/language/explicit
- 
- 5) insert part4(); at the end of main, before the 'good to go'    //done
- 
- 6) make sure it compiles without errors.
- 
- You will need to use Forward Declaration and out-of-class definitions to complete this.
+ 4) your main() function should be the same as Project 4 part 4, 
+    excluding the changes made due to 1)
+     
+ 5) delete the example below after it makes sense how your code will change due to 1).
+ */
+
+#include <iostream>
+namespace Example
+{
+    int main()
+    {
+        FloatType floatNum(4.3f);
+        IntType intNum(2);
+        IntType intNum2(6);
+
+        /* 
+        if you previously had a line like this demonstrating chaining:
+            
+            intNum.add(3).add(4.5f).divide(floatNum); 
+
+        it should become:
+        */
+        intNum += 3;
+        intNum += 4.5f;
+        intNum /= floatNum;
+        std::cout << "intNum: " << intNum << std::endl;
+        
+        return 0;
+    }
+}
+
+ /*
+ 6) compile/link/run to make sure you don't have any errors or warnings.
+
+ 7) your program should produce the exact same output as Project 4 part 4, listed below.
+    use https://www.diffchecker.com/diff to make sure it is the same.
  */
 
 /*
 your program should generate the following output EXACTLY.
-This includes the warnings.  
- The output should have zero warnings.
+This includes any warnings included below.  
+
+The output should have zero warnings.
 
 
 FloatType add result=4
@@ -152,6 +159,7 @@ good to go!
 
 Use a service like https://www.diffchecker.com/diff to compare your output. 
 */
+
 
 //Structs
 
