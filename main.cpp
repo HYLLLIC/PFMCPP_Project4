@@ -186,10 +186,10 @@ struct DoubleType
     explicit DoubleType(double v);
     ~DoubleType();
 
-    DoubleType& operator += (double x);
-    DoubleType& operator -= (double x);
-    DoubleType& operator *= (double x);
-    DoubleType& operator /= (double x);
+    DoubleType& += (double x);
+    DoubleType& -= (double x);
+    DoubleType& *= (double x);
+    DoubleType& /= (double x);
     DoubleType& pow(double y);
     DoubleType& pow(const FloatType& y);
     DoubleType& pow(const DoubleType& y);
@@ -208,10 +208,10 @@ struct IntType
     explicit IntType(int v);
     ~IntType();
 
-    IntType& operator += (int x);
-    IntType& operator -= (int x);
-    IntType& operator *= (int x);
-    IntType& operator /= (int x);
+    IntType& += (int x);
+    IntType& -= (int x);
+    IntType& *= (int x);
+    IntType& /= (int x);
     IntType& pow(int y);
     IntType& pow(const FloatType& y);
     IntType& pow(const DoubleType& y);
@@ -653,15 +653,12 @@ int main()
     // Intercept division by 0
     // --------
     std::cout << "Intercept division by 0 " << std::endl;
-    std::cout << "New value of it = it / 0 = ";
     it /= 0;
-    std::cout << it << std::endl;
-    std::cout << "New value of ft = ft / 0 = "; 
+    std::cout << "New value of it = it / 0 = " << it << std::endl;
     ft /= 0;
-    std::cout << ft << std::endl;
-    std::cout << "New value of dt = dt / 0 = ";
+    std::cout << "New value of ft = ft / 0 = " << ft << std::endl;
     dt /= 0;
-    std::cout << dt << std::endl;
+    std::cout << "New value of dt = dt / 0 = " << dt << std::endl;
 
     std::cout << "---------------------\n" << std::endl; 
 
