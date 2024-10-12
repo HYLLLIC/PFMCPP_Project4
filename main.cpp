@@ -25,7 +25,7 @@ Do not delete your previous main.
     excluding the changes made due to 1)
      
  5) delete the example below after it makes sense how your code will change due to 1).
- */
+ */ 
 
 #include <iostream>
 namespace Example
