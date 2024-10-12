@@ -189,10 +189,10 @@ struct FloatType
     explicit FloatType(float v);
     ~FloatType();
 
-    FloatType& operator += (float x);
-    FloatType& operator -= (float x);
-    FloatType& operator *= (float x);
-    FloatType& operator /= (float x);
+    FloatType& add(float x);
+    FloatType& subtract(float x);
+    FloatType& multiply(float x);
+    FloatType& divide(float x);
     FloatType& pow(float y);
     FloatType& pow(const FloatType& y);
     FloatType& pow(const DoubleType& y);
@@ -211,10 +211,10 @@ struct DoubleType
     explicit DoubleType(double v);
     ~DoubleType();
 
-    DoubleType& += (double x);
-    DoubleType& -= (double x);
-    DoubleType& *= (double x);
-    DoubleType& /= (double x);
+    DoubleType& add(double x);
+    DoubleType& subtract(double x);
+    DoubleType& multiply(double x);
+    DoubleType& divide(double x);
     DoubleType& pow(double y);
     DoubleType& pow(const FloatType& y);
     DoubleType& pow(const DoubleType& y);
@@ -233,10 +233,10 @@ struct IntType
     explicit IntType(int v);
     ~IntType();
 
-    IntType& += (int x);
-    IntType& -= (int x);
-    IntType& *= (int x);
-    IntType& /= (int x);
+    IntType& add(int x);
+    IntType& subtract(int x);
+    IntType& multiply(int x);
+    IntType& divide(int x);
     IntType& pow(int y);
     IntType& pow(const FloatType& y);
     IntType& pow(const DoubleType& y);
@@ -285,25 +285,25 @@ FloatType& FloatType::pow(const IntType& y)
     return powInternal(static_cast<float>(y));
 }
 
-FloatType& FloatType::operator += (float x)
+FloatType& FloatType::add(float x)
 {
     *value += x;
     return *this;
 }
 
-FloatType& FloatType::operator -= (float x)
+FloatType& FloatType::subtract(float x)
 {
     *value -= x;
     return *this;
 }
 
-FloatType& FloatType::operator *= (float x)
+FloatType& FloatType::multiply(float x)
 {
     *value *= x;
     return *this;
 }
 
-FloatType& FloatType::operator /= (float x)
+FloatType& FloatType::divide(float x)
 {
     if (x == 0.0f)
     {
@@ -347,25 +347,25 @@ DoubleType& DoubleType::pow(const IntType& y)
     return powInternal(static_cast<double>(y));
 }
 
-DoubleType& DoubleType::operator += (double x)
+DoubleType& DoubleType::add(double x)
 {
     *value += x;
     return *this;
 }
 
-DoubleType& DoubleType::operator -= (double x)
+DoubleType& DoubleType::subtract(double x)
 {
     *value -= x;
     return *this;
 }
 
-DoubleType& DoubleType::operator *= (double x)
+DoubleType& DoubleType::multiply(double x)
 {
     *value *= x;
     return *this;
 }
 
-DoubleType& DoubleType::operator /= (double x)
+DoubleType& DoubleType::divide(double x)
 {
     if (x == 0.0)
     {
@@ -409,25 +409,25 @@ IntType& IntType::pow(const IntType& y)
     return powInternal(static_cast<int>(y));
 }
 
-IntType& IntType::operator += (int x)
+IntType& IntType::add(int x)
 {
     *value += x;
     return *this;
 }
 
-IntType& IntType::operator -= (int x)
+IntType& IntType::subtract(int x)
 {
     *value -= x;
     return *this;
 }
 
-IntType& IntType::operator *= (int x)
+IntType& IntType::multiply(int x)
 {
     *value *= x;
     return *this;
 }
 
-IntType& IntType::operator /= (int x)
+IntType& IntType::divide(int x)
 {
     if (x == 0)
     {
