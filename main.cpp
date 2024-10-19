@@ -271,7 +271,7 @@ struct Numeric
             std::cout << "warning: floating point division by zero!" << std::endl;
         }
 
-        *value /= static_cast<Type>(num);
+        *value /= static_cast<Type>(x);
         return *this;
     }
 
@@ -355,7 +355,7 @@ struct Numeric<double>
     template<typename D>
     Numeric& operator/=(D x) 
     {
-        if (num <= std::numeric_limits<D>::epsilon())
+        if (x <= std::numeric_limits<D>::epsilon())
         {
             std::cout << "warning: floating point division by zero!" << std::endl;
         }
@@ -611,6 +611,11 @@ void part6()
 }
 ================end myFuncts for part6================
 */
+
+template<typename T>
+void myNumericFreeFunct(Numeric<T>& obj) {
+    obj += 7;
+}
 
 void part7()
 {
