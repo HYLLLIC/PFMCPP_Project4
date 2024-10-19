@@ -12,7 +12,7 @@ Templates and Containers
     I recommend committing after you get each step working so you can revert to a working version easily if needed.
     it's very easy to mess this task up. 
 
-0) comment out part6(), both the function and where it is called.    //done
+0) comment out part6(), both the function and where it is called.
 
 #1) if you're not using std::unique_ptr to own your heap-allocated type as a member variable, 
     replace your manual memory management techniques with a private std::unique_ptr member variable.
@@ -397,7 +397,7 @@ private:
     }
 };
 
-//Point Struct
+//Point Struct updated
 struct Point
 {
     explicit Point( float pOne, float pTwo ) : x(pOne), y(pTwo) {}
@@ -717,7 +717,7 @@ int main()
     it += 100;
     std::cout << "Chain calculation = " << it << std::endl;
 
-        // FloatType object instanciation and method tests
+    // FloatType object instanciation and method tests
     // --------
     ft += 3.0f;
     ft *= 1.5f;
@@ -756,7 +756,7 @@ int main()
 
     part3();
     part4();
-    //part6(); //uncomment for part6
+    //part6();
     part7();
 
     std::cout << "good to go!\n";
