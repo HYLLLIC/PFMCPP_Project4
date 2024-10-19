@@ -220,334 +220,6 @@ struct HeapA
 #include <limits>
 #include <memory>
 
-/*
-================Older Code - Reference================
-struct FloatType;
-struct DoubleType;
-struct IntType;
-
-//FloatType
-struct FloatType
-{
-    explicit FloatType(float v);
-    ~FloatType();
-
-    FloatType& operator+=(float x);
-    FloatType& operator-=(float x);
-    FloatType& operator*=(float x);
-    FloatType& operator/=(float x);
-    FloatType& pow(float y);
-    FloatType& pow(const FloatType& y);
-    FloatType& pow(const DoubleType& y);
-    FloatType& pow(const IntType& y);
-
-    FloatType& apply( std::function<FloatType&(FloatType&)> f );
-    FloatType& apply( void(*f)(FloatType&) );
-
-    operator float() const { return *value; }
-
-private:
-    float* value = nullptr;
-    FloatType& powInternal(float arg);
-};
-
-//DoubleType
-struct DoubleType
-{
-    explicit DoubleType(double v);
-    ~DoubleType();
-
-    DoubleType& operator+=(double x);
-    DoubleType& operator-=(double x);
-    DoubleType& operator*=(double x);
-    DoubleType& operator/=(double x);
-    DoubleType& pow(double y);
-    DoubleType& pow(const FloatType& y);
-    DoubleType& pow(const DoubleType& y);
-    DoubleType& pow(const IntType& y);
-
-    DoubleType& apply( std::function<DoubleType&(DoubleType&)> f );
-    DoubleType& apply( void(*f)(DoubleType&) );
-
-    operator double() const { return *value; }
-
-private:
-    double* value = nullptr;
-    DoubleType& powInternal(double arg);
-};
-
-//IntType
-struct IntType
-{
-    explicit IntType(int v);
-    ~IntType();
-
-    IntType& operator+=(int x);
-    IntType& operator-=(int x);
-    IntType& operator*=(int x);
-    IntType& operator/=(int x);
-    IntType& pow(int y);
-    IntType& pow(const FloatType& y);
-    IntType& pow(const DoubleType& y);
-    IntType& pow(const IntType& y);
-
-    IntType& apply( std::function<IntType&(IntType&)> f );
-    IntType& apply( void(*f)(IntType&) );
-
-    operator int() const { return *value; }
-
-private:
-    int* value = nullptr;
-    IntType& powInternal(int arg);
-};
-
-//UDT functions
-
-//float
-FloatType::FloatType(float v) : value(new float(v)) {}
-
-FloatType::~FloatType() 
-{
-    delete value;
-}
-
-FloatType& FloatType::apply( std::function<FloatType&(FloatType&)> f )
-{
-    if (f)
-    {
-        return f(*this);
-    }
-    return *this;
-}
-
-FloatType& FloatType::apply( void(*f)(FloatType&) )
-{
-    if (f)
-    {
-        f(*this);
-    }
-    return *this;
-}
-
-FloatType& FloatType::powInternal(float arg)
-{
-    *value = std::pow(*value, arg);
-    return *this;
-}
-
-FloatType& FloatType::pow(float y)
-{
-    return powInternal(y);
-}
-
-FloatType& FloatType::pow(const FloatType& y)
-{
-    return powInternal(static_cast<float>(y));
-}
-
-FloatType& FloatType::pow(const DoubleType& y)
-{
-    return powInternal(static_cast<float>(y));
-}
-
-FloatType& FloatType::pow(const IntType& y)
-{
-    return powInternal(static_cast<float>(y));
-}
-
-FloatType& FloatType::operator+=(float x)
-{
-    *value += x;
-    return *this;
-}
-
-FloatType& FloatType::operator-=(float x)
-{
-    *value -= x;
-    return *this;
-}
-
-FloatType& FloatType::operator*=(float x)
-{
-    *value *= x;
-    return *this;
-}
-
-FloatType& FloatType::operator/=(float x)
-{
-    if (x == 0.0f)
-    {
-        std::cout << "warning: floating point division by zero!\n";
-    }
-    *value /= x;
-    return *this;
-}
-
-//double
-DoubleType::DoubleType(double v) : value(new double(v)) {}
-
-DoubleType::~DoubleType() 
-{
-    delete value;
-}
-
-DoubleType& DoubleType::apply( std::function<DoubleType&(DoubleType&)> f )
-{
-    if (f)
-    {
-        return f(*this);
-    }
-    return *this;
-}
-
-DoubleType& DoubleType::apply( void(*f)(DoubleType&) )
-{
-    if (f)
-    {
-        f(*this);
-    }
-    return *this;
-}
-
-DoubleType& DoubleType::powInternal(double arg)
-{
-    *value = std::pow(*value, arg);
-    return *this;
-}
-
-DoubleType& DoubleType::pow(double y)
-{
-    return powInternal(y);
-}
-
-DoubleType& DoubleType::pow(const FloatType& y)
-{
-    return powInternal(static_cast<double>(y));
-}
-
-DoubleType& DoubleType::pow(const DoubleType& y)
-{
-    return powInternal(static_cast<double>(y));
-}
-
-DoubleType& DoubleType::pow(const IntType& y)
-{
-    return powInternal(static_cast<double>(y));
-}
-
-DoubleType& DoubleType::operator+=(double x)
-{
-    *value += x;
-    return *this;
-}
-
-DoubleType& DoubleType::operator-=(double x)
-{
-    *value -= x;
-    return *this;
-}
-
-DoubleType& DoubleType::operator*=(double x)
-{
-    *value *= x;
-    return *this;
-}
-
-DoubleType& DoubleType::operator/=(double x)
-{
-    if (x == 0.0)
-    {
-        std::cout << "warning: floating point division by zero!\n";
-    } 
-    *value /= x;
-    return *this;
-}
-
-//int
-IntType::IntType(int v): value(new int(v)) {}
-
-IntType::~IntType()
-{
-    delete value;
-}
-
-IntType& IntType::powInternal(int arg)
-{
-    *value = static_cast<int>(std::pow(*value, arg));
-    return *this;
-}
-
-IntType& IntType::apply( std::function<IntType&(IntType&)> f )
-{
-    if (f)
-    {
-        return f(*this);
-    }
-    return *this;
-}
-
-IntType& IntType::apply( void(*f)(IntType&) )
-{
-    if (f)
-    {
-        f(*this);
-    }
-    return *this;
-}
-
-IntType& IntType::pow(int y)
-{
-    return powInternal(y);
-}
-
-IntType& IntType::pow(const FloatType& y)
-{
-    return powInternal(static_cast<int>(y));
-}
-
-IntType& IntType::pow(const DoubleType& y)
-{
-    return powInternal(static_cast<int>(y));
-}
-
-IntType& IntType::pow(const IntType& y)
-{
-    return powInternal(static_cast<int>(y));
-}
-
-IntType& IntType::operator+=(int x)
-{
-    *value += x;
-    return *this;
-}
-
-IntType& IntType::operator-=(int x)
-{
-    *value -= x;
-    return *this;
-}
-
-IntType& IntType::operator*=(int x)
-{
-    *value *= x;
-    return *this;
-}
-
-IntType& IntType::operator/=(int x)
-{
-    if (x == 0)
-    {
-        std::cout << "error: integer division by zero is an error and will crash the program!\n";
-    }
-    else
-    {
-        *value /= x;   
-    }
-    return *this;
-}
-================Older Code - End Reference================
-*/
-
 //Numeric to replace older code
 template<typename T>
 struct Numeric
@@ -942,16 +614,18 @@ void part6()
 
 void part7()
 {
-    Numeric ft3(3.0f);
-    Numeric dt3(4.0);
-    Numeric it3(5);
+    Numeric<float> ft3(3.0f);
+    Numeric<double> dt3(4.0);
+    Numeric<int> it3(5);
 
     std::cout << "Calling Numeric<float>::apply() using a lambda (adds 7.0f) and Numeric<float> as return type:" << std::endl;
     std::cout << "ft3 before: " << ft3 << std::endl;
 
     {
-        using Type = #4;
-        ft3.apply( [](std::unique...){} );
+        ft3.apply([](Numeric<decltype(ft3)::Type>& obj) -> Numeric<decltype(ft3)::Type>& {
+            obj += 7.0f;
+            return obj;
+        });
     }
 
     std::cout << "ft3 after: " << ft3 << std::endl;
@@ -965,8 +639,10 @@ void part7()
     std::cout << "dt3 before: " << dt3 << std::endl;
 
     {
-        using Type = #4;
-        dt3.apply( [](std::unique...){} ); // This calls the templated apply fcn
+        dt3.apply([](Numeric<double>& obj) -> Numeric<double>& {
+            obj += 6.0;
+            return obj;
+        });
     }
 
     std::cout << "dt3 after: " << dt3 << std::endl;
@@ -980,8 +656,10 @@ void part7()
     std::cout << "it3 before: " << it3 << std::endl;
 
     {
-        using Type = #4;
-        it3.apply( [](std::unique...){} );
+        it3.apply([](Numeric<decltype(it3)::Type>& obj) -> Numeric<decltype(it3)::Type>& {
+            obj += 5;
+            return obj;
+        });
     }
     std::cout << "it3 after: " << it3 << std::endl;
     std::cout << "Calling Numeric<int>::apply() twice using a free function (adds 7) and void as return type:" << std::endl;
@@ -997,9 +675,9 @@ int main()
     HeapA heapA; 
 
     //assign heap primitives
-    FloatType ft ( 2.0f );
-    DoubleType dt ( 2.0 );
-    IntType it ( 2 ) ;
+    Numeric<float> ft ( 2.0f );
+    Numeric<double> dt ( 2.0 );
+    Numeric<int> it ( 2 );
 
 
     ft += 2.0f;
