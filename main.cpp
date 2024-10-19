@@ -557,44 +557,44 @@ struct Numeric
     explicit Numeric(Type v) : value(std::make_unique<Type>(v)) {}
     ~Numeric() {}
 
-    Numeric& operator+=(Type num) 
+    Numeric& operator+=(Type x) 
     {
-        *value += num;
+        *value += x;
         return *this;
     }
 
-    Numeric& operator-=(Type num) 
+    Numeric& operator-=(Type x) 
     {
-        *value -= num;
+        *value -= x;
         return *this;
     }
 
-    Numeric& operator*=(Type num) 
+    Numeric& operator*=(Type x) 
     {
-        *value *= num;
+        *value *= x;
         return *this;
     }
 
-    template<typename U>
-    Numeric& operator/=(U num) 
+    template<typename D>
+    Numeric& operator/=(D x) 
     {
         if constexpr (std::is_same<Type, int>::value)
         {
-            if constexpr (std::is_same<U, int>::value)
+            if constexpr (std::is_same<D, int>::value)
             {
-                if (num == 0)
+                if (x == 0)
                 {
                     std::cout << "error: integer division by zero is an error and will crash the program!" << std::endl;
                     return *this;
                 }
             }
-            else if(num <= std::numeric_limits<U>::epsilon())
+            else if(x <= std::numeric_limits<D>::epsilon())
             {
                 std::cout << "can't divide integers by zero!" << std::endl;
                 return *this;
             }
         }
-        else if(num <= std::numeric_limits<U>::epsilon())
+        else if(x <= std::numeric_limits<D>::epsilon())
         {
             std::cout << "warning: floating point division by zero!" << std::endl;
         }
@@ -603,31 +603,31 @@ struct Numeric
         return *this;
     }
 
-    Numeric& pow(Type num)
+    Numeric& pow(Type y)
     {
-        return powInternal(num);
+        return powInternal(y);
     }
 
-    template<typename U>
-    Numeric& pow(const Numeric<U>& ntype)
+    template<typename D>
+    Numeric& pow(const Numeric<D>& ntype)
     {
         return powInternal(static_cast<Type>(ntype));
     }
 
-    Numeric& apply( std::function<Numeric&(Numeric&)> func )
+    Numeric& apply( std::function<Numeric&(Numeric&)> f )
     {
-        if (func)
+        if (f)
         {
-            return func(*this);
+            return f(*this);
         }
         return *this;
     }
 
-    Numeric& apply( void(*func)(Numeric&) )
+    Numeric& apply( void(*f)(Numeric&) )
     {
-        if (func)
+        if (f)
         {
-            func(*this);
+            f(*this);
         }
         return *this;
     }
@@ -662,51 +662,51 @@ struct Numeric<double>
     explicit Numeric(Type v) : value(std::make_unique<Type>(v)) {}
     ~Numeric() {}
 
-    Numeric& operator+=(Type num) 
+    Numeric& operator+=(Type x) 
     {
-        *value += num;
+        *value += x;
         return *this;
     }
 
-    Numeric& operator-=(Type num) 
+    Numeric& operator-=(Type x) 
     {
-        *value -= num;
+        *value -= x;
         return *this;
     }
 
-    Numeric& operator*=(Type num) 
+    Numeric& operator*=(Type x) 
     {
-        *value *= num;
+        *value *= x;
         return *this;
     }
 
-    template<typename U>
-    Numeric& operator/=(U num) 
+    template<typename D>
+    Numeric& operator/=(D x) 
     {
-        if (num <= std::numeric_limits<U>::epsilon())
+        if (num <= std::numeric_limits<D>::epsilon())
         {
             std::cout << "warning: floating point division by zero!" << std::endl;
         }
 
-        *value /= static_cast<Type>(num);
+        *value /= static_cast<Type>(x);
         return *this;
     }
 
-    Numeric& pow(Type num)
+    Numeric& pow(Type y)
     {
-        return powInternal(num);
+        return powInternal(y);
     }
 
-    template<typename U>
-    Numeric& pow(const Numeric<U>& ntype)
+    template<typename D>
+    Numeric& pow(const Numeric<D>& ntype)
     {
         return powInternal(static_cast<Type>(ntype));
     }
 
     template<typename Callable>
-    Numeric& apply(Callable func)
+    Numeric& apply(Callable f)
     {
-        func(*this);
+        f(*this);
         return *this;
     }
 
@@ -729,9 +729,9 @@ private:
 struct Point
 {
     explicit Point( float pOne, float pTwo ) : x(pOne), y(pTwo) {}
-    explicit Point( const FloatType& pOne, const FloatType& pTwo ) : Point(static_cast<float>(pOne), static_cast<float>(pTwo)) {}
-    explicit Point( const DoubleType& pOne, const DoubleType& pTwo ) : Point(static_cast<float>(pOne), static_cast<float>(pTwo)) {}
-    explicit Point( const IntType& pOne, const IntType& pTwo ) : Point(static_cast<float>(pOne), static_cast<float>(pTwo)) {}
+
+    template<typename D, typename E>
+    Point(const D& arg1, const E& arg2) : Point( static_cast<float>(arg1), static_cast<float>(arg2) ) { }
 
     Point& multiply(float m)
     {
@@ -740,19 +740,10 @@ struct Point
         return *this;
     }
 
-    Point& multiply(const FloatType& m)
+    template<typename G>
+    Point& multiply(const G& g) 
     {
-        return multiply(static_cast<float>(m));
-    }
-
-    Point& multiply(const DoubleType& m)
-    {
-         return multiply(static_cast<float>(m));   
-    }
-
-    Point& multiply(const IntType& m)
-    {
-         return multiply(static_cast<float>(m));   
+        return multiply( static_cast<float>(g) );
     }
 
     void toString() const
@@ -780,10 +771,10 @@ private:
 
 void part3()
 {
-    FloatType ft( 5.5f );
-    DoubleType dt( 11.1 );
-    IntType it ( 34 );
-    DoubleType pi( 3.14 );
+    Numeric<float> ft( 5.5f );
+    Numeric<double> dt( 11.1 );
+    Numeric<int> it ( 34 );
+    Numeric<double> pi( 3.14 );
 
     ft *= ft;
     ft *= ft;
@@ -816,15 +807,15 @@ void part4()
     // ------------------------------------------------------------
     //                          Power tests
     // ------------------------------------------------------------
-    FloatType ft1(2);
-    DoubleType dt1(2);
-    IntType it1(2);    
+    Numeric<float> ft1(2);
+    Numeric<double> dt1(2);
+    Numeric<int> it1(2);    
     float floatExp = 2.0f;
     double doubleExp = 2.0;
     int intExp = 2;
-    IntType itExp(2);
-    FloatType ftExp(2.0f);
-    DoubleType dtExp(2.0);
+    Numeric<int> itExp(2);
+    Numeric<float> ftExp(2.0f);
+    Numeric<double> dtExp(2.0);
 
     // Power tests with FloatType
     std::cout << "Power tests with FloatType" << std::endl;
@@ -853,9 +844,9 @@ void part4()
     // ------------------------------------------------------------
     //                          Point tests
     // ------------------------------------------------------------
-    FloatType ft2(3.0f);
-    DoubleType dt2(4.0);
-    IntType it2(5);
+    Numeric<float> ft2(3.0f);
+    Numeric<double> dt2(4.0);
+    Numeric<int> it2(5);
     float floatMul = 6.0f;
 
     // Point tests with float
