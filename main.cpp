@@ -122,7 +122,7 @@ struct Numeric
 {
     using Type = T;
 
-    explicit Numeric(Type v) : value(std::make_unique<Temporary<Type>>(v)) {}
+    explicit Numeric(Type v) : value( std::make_unique<Temporary<Type>>(v) ) {}
     ~Numeric() {}
 
     template<typename OtherType>
@@ -184,7 +184,7 @@ struct Numeric
     template<typename OtherType>
     Numeric& pow(const OtherType& num)
     {
-        *value = std::pow(*value, static_cast<Type>(num));
+        *value = std::pow( *value, static_cast<Type>(num) );
         return *this;
     }
 
@@ -216,7 +216,7 @@ struct Point
     explicit Point( float pOne, float pTwo ) : x(pOne), y(pTwo) {}
 
     template<typename D, typename E>
-    Point(const D& arg1, const E& arg2) : Point( static_cast<float>(arg1), static_cast<float>(arg2) ) { }
+    Point(const D& arg1, const E& arg2) : Point( static_cast<float>(arg1), static_cast<float>(arg2) ) {}
 
     Point& multiply(float m)
     {
