@@ -8,18 +8,10 @@ Create a branch named Part9
  
  DO NOT EDIT YOUR PREVIOUS main(). 
  
- 1) add the Leak Detector files from Project5
+ 1) add the Leak Detector files from Project5    //done
  
- 2) move these macros after the JUCE_LEAK_DETECTOR macro :
+ 2) move these macros after the JUCE_LEAK_DETECTOR macro :    //done
  */
-
-#define JUCE_DECLARE_NON_COPYABLE(className) \
-            className (const className&) = delete;\
-            className& operator= (const className&) = delete;
-
-#define JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(className) \
-            JUCE_DECLARE_NON_COPYABLE(className) \
-            JUCE_LEAK_DETECTOR(className)
 
 /*
  3) add JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(Temporary) to the end of the  Temporary<> struct
