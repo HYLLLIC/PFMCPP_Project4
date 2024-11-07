@@ -76,6 +76,12 @@ struct Temporary
         std::cout << "I'm a Temporary<" << typeid(v).name() << "> object, #"
                   << counter++ << std::endl;
     }
+    ~Temporary() {}
+    Temporary(const Temporary& other) : v(new NumericType(*other.v)) {}
+    Temporary& operator=(const Temporary& other) 
+    {
+        
+    }
 
     operator NumericType() const 
     { 
