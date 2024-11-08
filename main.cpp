@@ -20,11 +20,10 @@ Create a branch named Part9
  
  if you compile it, you'll see lots of errors about deleted functions.
  
- 5) Implement the Rule of 5 on Numeric<> and Temporary<> to fix this.
+ 5) Implement the Rule of 5 on Numeric<> and Temporary<> to fix this.    //done
  
  You should end up with the same program output as Part 8's task if you did it right.
  */
-
 
 /*
  If you did everything correctly, this is the output you should get:
@@ -68,6 +67,7 @@ Use a service like https://www.diffchecker.com/diff to compare your output.
 #include <iostream>
 #include <cmath>
 #include <functional>
+#include <limits>
 
 template<typename NumericType>
 struct Temporary
@@ -84,7 +84,7 @@ struct Temporary
 
     //Temporary& operator=(const Temporary& other) {}
 
-    Temporary(Temporary&& other) : v(std::move(other.v)) {}
+    Temporary(Temporary&& other) : v( std::move(other.v) ) {}
 
     Temporary& operator=(Temporary&& other)
     {
@@ -120,11 +120,7 @@ struct Numeric
 
     ~Numeric() {}
 
-    //Numeric(const Numeric& other) : v(new NumericType(*other.v)) {}
-
-    //Numeric& operator=(const Numeric& other) {}
-
-    Numeric(Numeric&& other) : value(std::move(other.value)) {}
+    Numeric(Numeric&& other) : value( std::move(other.value) ) {}
 
     Numeric& operator=(Numeric&& other)
     {
