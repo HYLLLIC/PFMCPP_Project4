@@ -80,10 +80,6 @@ struct Temporary
 
     ~Temporary() {}
 
-    //Temporary(const Temporary& other) : v(new NumericType(*other.v)) {}
-
-    //Temporary& operator=(const Temporary& other) {}
-
     Temporary(Temporary&& other) : v( std::move(other.v) ) {}
 
     Temporary& operator=(Temporary&& other)
