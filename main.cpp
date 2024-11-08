@@ -82,9 +82,7 @@ struct Temporary
 
     Temporary(const Temporary& other) : v(new NumericType(*other.v)) {}
 
-    Temporary& operator=(const Temporary& other) 
-    {
-    }
+    Temporary& operator=(const Temporary& other) {}
 
     Temporary(Temporary&& other) : v(std::move(other.v)) {}
 
@@ -124,9 +122,7 @@ struct Numeric
 
     Numeric(const Numeric& other) : v(new NumericType(*other.v)) {}
 
-    Numeric& operator=(const Numeric& other) 
-    {
-    }
+    Numeric& operator=(const Numeric& other) {}
 
     Numeric(Numeric&& other) : value(std::move(other.value)) {}
 
