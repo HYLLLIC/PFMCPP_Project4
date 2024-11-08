@@ -62,6 +62,7 @@ i cubed: 531441
 Use a service like https://www.diffchecker.com/diff to compare your output. 
 */
 
+#include "LeakedObjectDetector.h"
 #include <typeinfo>
 #include <memory>
 #include <iostream>
@@ -76,11 +77,21 @@ struct Temporary
         std::cout << "I'm a Temporary<" << typeid(v).name() << "> object, #"
                   << counter++ << std::endl;
     }
+
     ~Temporary() {}
+
     Temporary(const Temporary& other) : v(new NumericType(*other.v)) {}
+
     Temporary& operator=(const Temporary& other) 
     {
-        
+    }
+
+    Temporary(Temporary&& other) : v(std::move(other.v)) {}
+
+    Temporary& operator=(Temporary&& other)
+    {
+        v = std::move(other.v);
+        return *this;
     }
 
     operator NumericType() const 
@@ -108,7 +119,22 @@ struct Numeric
     using Type = T;
 
     explicit Numeric(Type v) : value( std::make_unique<Temporary<Type>>(v) ) {}
+
     ~Numeric() {}
+
+    Numeric(const Numeric& other) : v(new NumericType(*other.v)) {}
+
+    Numeric& operator=(const Numeric& other) 
+    {
+    }
+
+    Numeric(Numeric&& other) : value(std::move(other.value)) {}
+
+    Numeric& operator=(Numeric&& other)
+    {
+        *value = std::move(*other.value);
+        return *this;
+    }
 
     template<typename OtherType>
     Numeric& operator=(const OtherType& num)
@@ -189,7 +215,6 @@ struct Numeric
     {
         return *value;
     }
-
 
 private:
     std::unique_ptr<Temporary<Type>> value = nullptr;
